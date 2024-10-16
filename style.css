@@ -1,6 +1,63 @@
+body {
+    background-color: white;
+}
+
+h1 {
+    text-align:center;
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 10px;
+}
+
+#buttonContainer {
+    flex-direction:  row;
+    justify-content: center;
+}
+
+button {
+    margin: 5px;
+    background-color: rgb(147, 193, 245);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 450px;
+    height: 450px;
+    border: 5px solid black;
+}
+
+.boldCol {
+    border-right: 5px solid black;
+}
+
+.boldRow {
+    border-bottom: 5px solid black;
+}
+
+td {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* For smaller screens */
+@media screen and (max-width:550px) {
+
+    #sudokuContainer {
+        width: 100vw; 
+        height: 100vw; 
+    }
+    table {
+        width: 90%;
+        height: 90%;
+    }
 }
