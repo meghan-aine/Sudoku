@@ -17,6 +17,7 @@ h1 {
 #buttonContainer {
     flex-direction:  row;
     justify-content: center;
+    margin-top: 20px;
 }
 
 button {
@@ -53,11 +54,17 @@ td {
 @media screen and (max-width:550px) {
 
     #puzzleContainer {
+        flex-grow: 1;
         width: 100vw; 
-        height: 100vw; 
+        height: auto; 
     }
     table {
         width: 90%;
+        min-width: 300px;
         height: 90%;
+        min-height: 300px;
+        max-height: 450px;
     }
+
+
 }
