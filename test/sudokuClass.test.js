@@ -48,4 +48,29 @@ describe("Sudoku", () => {
         assert.ok(!result);
       });
   })
+
+  describe(".startingGrid", () => {
+    it("should return a 9x9 array", () => {
+        //setup
+        let grid = new Sudoku;
+        const solution = sudoku.startingGrid;
+        //exercise
+        const width = grid.length;
+        const height = grid[0].length;
+        //verify
+        assert.ok(width===9 && height===9);
+      });
+
+      it("should only contain values from 0-9", () => {
+        //setup
+        let sudoku = new Sudoku;
+        const grid = sudoku.startingGrid;
+        const flattened = grid.flat();
+        const allowableValues = [0,1,2,3,4,5,6,7,8,9];
+        //exercise
+        const result = flattened.some(value => !allowableValues.includes(value));
+        //verify
+        assert.ok(!result);
+      });
+  })
 });
