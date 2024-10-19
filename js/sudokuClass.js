@@ -17,7 +17,7 @@ class Sudoku {
       .fill()
       .map(() => Array(9).fill(0));
 
-      this.solution = Array(9)
+    this.solution = Array(9)
       .fill()
       .map(() => Array(9).fill(0));
   }
@@ -25,27 +25,69 @@ class Sudoku {
   //methods
 
   //methods to check whether a number is in a row or column
-    //for row, array = this.solution[i]
-    //for col, array = this.solution.map(row => row[j])
-  static rowColChecker(array, val) {
-    return array.includes(val);
+  //for row, array = this.solution[i]
+  //for col, array = this.solution.map(row => row[j])
+  static rowColChecker(inputArray, val) {
+    return !inputArray.includes(val);
   }
 
-  squareChecker(row,col,val) {
+  squareChecker(row, col, val) {
     const subgridRow = Math.floor(row / 3) * 3;
     const subgridCol = Math.floor(col / 3) * 3;
     const subgrid = [];
-    for (let i=0; i<3; i++) {
-      subgrid.push(this.solution[subgridRow + i].slice(subgridCol, subgridCol + 3));
+    for (let i = 0; i < 3; i++) {
+      subgrid.push(
+        this.solution[subgridRow + i].slice(subgridCol, subgridCol + 3)
+      );
     }
 
-    return Sudoku.rowColChecker(subgrid,val);
+    return Sudoku.rowColChecker(subgrid.flat(), val);
   }
 
-  isValid(row,col,val) {
-    return Sudoku.rowColChecker(this.solution[row],val) &&
-  Sudoku.rowColChecker(this.solution.map(array => array[col]),val) &&
-  this.squareChecker(row,col,val)
+  isValid(row, col, val) {
+    return (
+      Sudoku.rowColChecker(this.solution[row], val) &&
+      Sudoku.rowColChecker(
+        this.solution.map((input) => input[col]),val
+      ) &&
+      this.squareChecker(row, col, val)
+    );
+  }
+
+  //method to solve a Sudoku puzzle
+  solve(array) {
+    if (
+      !Array.isArray(array) ||
+      array.length !== 9 ||
+      array[0].length !== 9 ||
+      array.flat().length !== 81
+    )
+      throw new Error("Input must be a 9x9 Array");
+
+    const allowableValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    if (!array.flat().every((value) => allowableValues.includes(value)))
+      throw new Error("Input array must have elements between 0 and 9");
+
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (array[row][col] === 0) {
+          for (let num = 1; num <= 9; num++) {
+            if (this.isValid(row, col, num)) {
+              array[row][col] = num; // Place the number
+
+              if (this.solve(array)) {
+                // Recursively try to solve
+                return true;
+              }
+
+              array[row][col] = 0; // Backtrack
+            }
+          }
+          return false; // Trigger backtracking
+        }
+      }
+    }
+    return true;
   }
 
   //method to create a legitimate sudoku solution
@@ -60,38 +102,19 @@ class Sudoku {
 
     this.solution[0] = numbers;
 
-    //populate other rows using checker functions
-    //TODO: make solver function first then use that to solve 
+    //populate other rows using solver function
+    //For a given starting row, the complete solution is unique
+
+    this.solve(this.solution)
   }
 
   //method to remove a certain number of cells
-    //difficulty input 1-80
-    //suggestion: easy(40) / medium(45) / hard(50) / expert(56)
+  //difficulty input: 1-80
+  //suggestion: easy(40) / medium(45) / hard(50) / expert(56)
   generateStartingGrid(difficulty) {
-
-  }
-
-  //method to solve a Sudoku puzzle
-  solve() {
-    for (let row = 0; row < 9; row++) {
-      for (let col = 0; col < 9; col++) {
-          if (this.grid[row][col] === 0) { 
-              for (let num = 1; num <= 9; num++) {
-                  if (this.isValid(row, col, num)) {
-                      this.grid[row][col] = num; // Place the number
-
-                      if (this.solve()) { // Recursively try to solve
-                          return true;
-                      }
-
-                      this.grid[row][col] = 0; // Backtrack
-                  }
-              }
-              return false; // Trigger backtracking
-          }
-      }
-  }
-  return true;
+    if (typeof difficulty !== "number" || difficulty < 1 || difficulty > 80) {
+      throw new Error("Difficulty must be a number between 1 and 80");
+    }
   }
 
   //method to check whether there are multiple solutions
@@ -99,8 +122,8 @@ class Sudoku {
 
 module.exports = Sudoku;
 
-/*
+
 //Testing Area
 let sudoku = new Sudoku();
-console.log(sudoku.solution); // prints empty 9x9 grid
-*/
+sudoku.generateSolvedSudoku();
+console.log(sudoku.solution); 
