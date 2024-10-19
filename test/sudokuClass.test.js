@@ -66,7 +66,7 @@ describe("Sudoku", () => {
         let sudoku = new Sudoku;
         const grid = sudoku.startingGrid;
         const flattened = grid.flat();
-        const allowableValues = [0,1,2,3,4,5,6,7,8,9];
+        const allowableValues = [' ',1,2,3,4,5,6,7,8,9];
         //exercise
         const result = flattened.some(value => !allowableValues.includes(value));
         //verify

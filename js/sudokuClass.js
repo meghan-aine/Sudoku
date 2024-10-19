@@ -103,8 +103,6 @@ class Sudoku {
     this.solution[0] = numbers;
 
     //populate other rows using solver function
-    //For a given starting row, the complete solution is unique
-
     this.solve(this.solution)
   }
 
@@ -115,6 +113,18 @@ class Sudoku {
     if (typeof difficulty !== "number" || difficulty < 1 || difficulty > 80) {
       throw new Error("Difficulty must be a number between 1 and 80");
     }
+
+    //initilise starting grid as the solution
+    this.startingGrid = this.solution.map(row => [...row]); // create deep copy of solution
+
+    //remove x values 
+    while (difficulty>0) {
+      const row = Math.floor(Math.random() * 9);
+      const col = Math.floor(Math.random() * 9);
+
+      this.startingGrid[row][col] = ' ';
+      difficulty--
+    }
   }
 
   //method to check whether there are multiple solutions
@@ -124,6 +134,31 @@ module.exports = Sudoku;
 
 
 //Testing Area
+function printSudoku(grid) {
+  console.log(" -----------------------------");
+  for (let i = 0; i < grid.length; i++) {
+    if (i !== 0 && i % 3 === 0) {
+      console.log(" -----------------------------");
+    }
+    let string = "";
+    for (let j = 0; j < grid[i].length; j++) {
+      if (j % 3 === 0) {
+        string += "|";
+      }
+      string += " " + grid[i][j] + " ";
+    }
+    console.log(string + "|");
+  }
+  console.log(" -----------------------------");
+}
+
 let sudoku = new Sudoku();
 sudoku.generateSolvedSudoku();
-console.log(sudoku.solution); 
+sudoku.generateStartingGrid(40);
+
+//console.log(sudoku.solution); 
+//console.log(sudoku.startingGrid);
+
+console.log(printSudoku(sudoku.solution)); 
+console.log(printSudoku(sudoku.startingGrid));
+
