@@ -36,6 +36,12 @@ class Sudoku {
     return Sudoku.rowColChecker(subgrid,val);
   }
 
+  isValid(row,col,val) {
+    return Sudoku.rowColChecker(this.grid[row],val) &&
+  Sudoku.rowColChecker(this.grid.map(array => array[col]),val) &&
+  this.squareChecker(row,col,val)
+  }
+
   //method to create a legitimate sudoku solution
   generateSolvedSudoku() {
     //1st row has 1-9 in a random order
@@ -48,6 +54,7 @@ class Sudoku {
 
     this.grid[0] = numbers;
 
+    //populate other rows using checker functions
 
   }
 }
