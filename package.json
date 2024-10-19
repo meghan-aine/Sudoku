@@ -1,0 +1,14 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "<h1>Generating and solving Sudoku puzzles</h1> View website: https://meghan-aine.github.io/Sudoku/",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.7.3"
+  }
+}
