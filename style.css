@@ -1,71 +1,104 @@
 body {
-    background-color: white;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h1 {
-    text-align:center;
+h1,
+h2 {
+  text-align: center;
 }
-
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+    width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-#buttonContainer {
-    flex-direction:  row;
-    justify-content: center;
-    margin-top: 20px;
-}
+/*Puzzle*/
 
-button {
-    margin: 5px;
-    padding: 10px;
-    background-color: rgb(147, 193, 245);
-    border-radius: 10px;
-    cursor: pointer;
-}
+#puzzleContainer {
+  display: flex;
+  max-width: 450px;
+  width: 90vw;
+min-width: 300px;
+  padding: 10px;
+  aspect-ratio: 1;
 
-table {
+  table {
+    position: center;
     border-collapse: collapse;
-    width: 450px;
-    height: 450px;
+    aspect-ratio: 1;
     border: 5px solid black;
-}
+  }
 
-.boldCol {
+  .boldCol {
     border-right: 5px solid black;
-}
+  }
 
-.boldRow {
+  .boldRow {
     border-bottom: 5px solid black;
-}
+  }
 
-td {
-    width: 50px;
-    height: 50px;
+  td {
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
+  }
+
+  .numberInputs {
+    height: 90%;
+    width: 90%;
+    font-size: 30px;
+    color: darkgrey;
+    text-align: right;
+    border: none;
+  }
+}
+
+/*Buttons*/
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#buttonContainer {
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  button {
+    background-color: rgb(147, 193, 245);
+  }
+}
+
+#newPuzzleContainer {
+  flex-direction: row;
+  justify-content: center;
+  #easyPuzzleButton {
+    background-color: rgb(197, 232, 220);
+  }
+  #medPuzzleButton {
+    background-color: lightgoldenrodyellow;
+  }
+  #hardPuzzleButton {
+    background-color: rgb(247, 207, 169);
+  }
+  #expertPuzzleButton {
+    background-color: rgb(248, 137, 137);
+  }
 }
 
 /* For smaller screens */
-@media screen and (max-width:550px) {
+@media screen and (max-width: 550px) {
 
-    #puzzleContainer {
-        flex-grow: 1;
-        width: 100vw; 
-        height: auto; 
+    .numberInputs {
+      font-size: 18px;
     }
-    table {
-        width: 90%;
-        min-width: 300px;
-        height: 90%;
-        min-height: 300px;
-        max-height: 450px;
-    }
-
-
+  
 }
