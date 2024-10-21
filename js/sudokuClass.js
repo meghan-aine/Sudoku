@@ -10,7 +10,7 @@ Test functionality
     b. Functions behave as expected
 */
 
-class Sudoku {
+ class Sudoku {
   constructor() {
     // begin with the grid and solution as empty 9x9 arrays
     this.startingGrid = Array(9)
@@ -130,4 +130,5 @@ class Sudoku {
   //method to check whether there are multiple solutions
 }
 
-module.exports = Sudoku;
+export default Sudoku
+//module.exports = Sudoku;
