@@ -50,13 +50,27 @@ min-width: 300px;
   }
 
   .numberInputs {
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
     font-size: 30px;
     color: darkgrey;
-    text-align: right;
+    text-align: center;
     border: none;
+    caret-color: transparent;
+    appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
   }
+
+  .gridSquare {
+    padding: 0px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.gridSquare:focus-within {
+  background-color: #ececec; /* Change to your desired color */
+}
 }
 
 /*Buttons*/
