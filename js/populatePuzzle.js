@@ -27,6 +27,11 @@ function populateSudokuGrid(grid) {
         cell.style.color = "black";
       }
 
+      else {
+        cell.disabled = false;
+        cell.style.color = "darkgrey"
+      }
+
       cell.value = value;
 
       index++;
@@ -82,41 +87,70 @@ expertPuzzleButton.addEventListener("click", () => generateNewPuzzle(56));
 //Puzzle buttons
 //Reset
 const resetButton = document.getElementById("resetButton");
-resetButton.addEventListener("click", () => populateSudokuGrid(currentStartingGrid));
-
+resetButton.addEventListener("click", () =>
+  populateSudokuGrid(currentStartingGrid)
+);
 
 //Reveal solution
 const revealSolutionButton = document.getElementById("revealSolutionButton");
-revealSolutionButton.addEventListener("click", () => populateSudokuGrid(currentSolution));
+revealSolutionButton.addEventListener("click", () =>
+  populateSudokuGrid(currentSolution)
+);
+
+//Validate entries
+/* 
+1. turn input + starting grid into an array
+2. compare square by square to solution
+3. if correct, green, if incorrect, red
+4. how to make sure colour changes back when changes are made?
+5. if arrays are identical, display message
+ */
+const inputs = document.querySelectorAll(".numberInputs");
+//const table = document.getElementById("puzzleTable")
+
+function checkAgainstSolution() {
+const inputtedValues = Array.from(inputs).map((input) => Number(input.value));
+
+console.log(inputtedValues);
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      const a = 9*i + j;
+      /*console.log(inputtedValues[a]);
+      console.log(currentSolution[i][j])*/
+      if (currentStartingGrid[i][j]===" " && currentSolution[i][j] === inputtedValues[a]) {
+        console.log('correct');
+      }
+      else if (currentStartingGrid[i][j]===" " && inputtedValues[a] !== 0) {console.log('incorrect')}
+    }
+  }
+}
+
+const validateButton = document.getElementById("validateButton");
+validateButton.addEventListener("click", checkAgainstSolution);
 
 
-//Event listener for input boxes
-const inputs = document.querySelectorAll('.numberInputs');
+//Event listener for input boxes to only allow 1-9
+inputs.forEach((input) => {
+  input.addEventListener("input", function () {
+    // Allow only digits 1-9 or empty
+    if (!/^([1-9]|)$/.test(this.value)) {
+      this.value = ""; // Clear invalid input
+    }
+  });
 
-        inputs.forEach(input => {
-            
-              input.addEventListener('input', function() {
-                  // Allow only digits 1-9 or empty
-                  if (!/^([1-9]|)$/.test(this.value)) {
-                      this.value = ''; // Clear invalid input
-                  }
-              });
-
-              input.addEventListener('keydown', function(event) {
-                const key = event.key;
-                if (key >= '1' && key <= '9') {
-                    this.value = key;
-                    event.preventDefault(); 
-                } else if (key === 'Backspace' || key === 'Delete' || key === '0') {
-                    this.value = ''; 
-                    event.preventDefault();
-                } else {
-                    event.preventDefault();
-                }
-            });
-
-            });
-
+  input.addEventListener("keydown", function (event) {
+    const key = event.key;
+    if (key >= "1" && key <= "9") {
+      this.value = key;
+      event.preventDefault();
+    } else if (key === "Backspace" || key === "Delete" || key === "0") {
+      this.value = "";
+      event.preventDefault();
+    } else {
+      event.preventDefault();
+    }
+  });
+});
 
 /*
 //Testing Area
