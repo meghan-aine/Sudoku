@@ -106,7 +106,7 @@ revealSolutionButton.addEventListener("click", () =>
 5. if arrays are identical, display message
  */
 const inputs = document.querySelectorAll(".numberInputs");
-//const table = document.getElementById("puzzleTable")
+const table = document.getElementById("puzzleTable")
 
 function checkAgainstSolution() {
 const inputtedValues = Array.from(inputs).map((input) => Number(input.value));
@@ -118,9 +118,11 @@ console.log(inputtedValues);
       /*console.log(inputtedValues[a]);
       console.log(currentSolution[i][j])*/
       if (currentStartingGrid[i][j]===" " && currentSolution[i][j] === inputtedValues[a]) {
-        console.log('correct');
+        table.rows[i].cells[j].style.backgroundColor = "rgb(221, 255, 243)";
       }
-      else if (currentStartingGrid[i][j]===" " && inputtedValues[a] !== 0) {console.log('incorrect')}
+      else if (currentStartingGrid[i][j]===" " && inputtedValues[a] !== 0) {
+        table.rows[i].cells[j].style.backgroundColor = "rgb(255, 208, 208)";
+      }
     }
   }
 }
