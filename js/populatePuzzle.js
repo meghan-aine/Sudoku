@@ -15,16 +15,16 @@ functions to
 function populateSudokuGrid(grid) {
   const cells = document.querySelectorAll("#puzzleContainer input");
   let index = 0;
-  let numberInputs = document.getElementById('numberInputs');
+  let numberInputs = document.getElementById("numberInputs");
 
   for (let r = 0; r < grid.length; r++) {
     for (let c = 0; c < grid[r].length; c++) {
       const value = grid[r][c];
       const cell = cells[index];
-     
+
       if (value !== " ") {
         cell.disabled = true;
-        cell.style.color='black';
+        cell.style.color = "black";
       }
 
       cell.value = value;
@@ -35,6 +35,14 @@ function populateSudokuGrid(grid) {
 }
 
 //generate levels of puzzle
+//initialise solution and starting grid as empty grids
+let currentSolution = Array(9)
+  .fill()
+  .map(() => Array(9).fill(" "));
+let currentStartingGrid = Array(9)
+  .fill()
+  .map(() => Array(9).fill(" "));
+
 function generateNewPuzzle(diff) {
   populateSudokuGrid(
     Array(9)
@@ -46,8 +54,13 @@ function generateNewPuzzle(diff) {
   sudoku.generateSolvedSudoku();
   sudoku.generateStartingGrid(diff);
 
+  currentSolution = sudoku.solution;
+  currentStartingGrid = sudoku.startingGrid;
 
-  populateSudokuGrid(sudoku.startingGrid);
+  populateSudokuGrid(currentStartingGrid);
+
+  //how to store solution somewhere to be used by reveal/check buttons?
+  //assign a variable workingSolution outside of the function and get the generate function to reassign?
 }
 
 //easy
@@ -65,6 +78,16 @@ hardPuzzleButton.addEventListener("click", () => generateNewPuzzle(50));
 //expert
 let expertPuzzleButton = document.getElementById("expertPuzzleButton");
 expertPuzzleButton.addEventListener("click", () => generateNewPuzzle(56));
+
+//Puzzle buttons
+//Reset
+let resetButton = document.getElementById("resetButton");
+resetButton.addEventListener("click", () => populateSudokuGrid(currentStartingGrid));
+
+
+//Reveal solution
+let revealSolutionButton = document.getElementById("revealSolutionButton");
+revealSolutionButton.addEventListener("click", () => populateSudokuGrid(currentSolution));
 
 //Testing Area
 function printSudoku(grid) {
