@@ -64,31 +64,61 @@ function generateNewPuzzle(diff) {
 }
 
 //easy
-let easyPuzzleButton = document.getElementById("easyPuzzleButton");
+const easyPuzzleButton = document.getElementById("easyPuzzleButton");
 easyPuzzleButton.addEventListener("click", () => generateNewPuzzle(40));
 
 //med
-let medPuzzleButton = document.getElementById("medPuzzleButton");
+const medPuzzleButton = document.getElementById("medPuzzleButton");
 medPuzzleButton.addEventListener("click", () => generateNewPuzzle(45));
 
 //hard
-let hardPuzzleButton = document.getElementById("hardPuzzleButton");
+const hardPuzzleButton = document.getElementById("hardPuzzleButton");
 hardPuzzleButton.addEventListener("click", () => generateNewPuzzle(50));
 
 //expert
-let expertPuzzleButton = document.getElementById("expertPuzzleButton");
+const expertPuzzleButton = document.getElementById("expertPuzzleButton");
 expertPuzzleButton.addEventListener("click", () => generateNewPuzzle(56));
 
 //Puzzle buttons
 //Reset
-let resetButton = document.getElementById("resetButton");
+const resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", () => populateSudokuGrid(currentStartingGrid));
 
 
 //Reveal solution
-let revealSolutionButton = document.getElementById("revealSolutionButton");
+const revealSolutionButton = document.getElementById("revealSolutionButton");
 revealSolutionButton.addEventListener("click", () => populateSudokuGrid(currentSolution));
 
+
+//Event listener for input boxes
+const inputs = document.querySelectorAll('.numberInputs');
+
+        inputs.forEach(input => {
+            
+              input.addEventListener('input', function() {
+                  // Allow only digits 1-9 or empty
+                  if (!/^([1-9]|)$/.test(this.value)) {
+                      this.value = ''; // Clear invalid input
+                  }
+              });
+
+              input.addEventListener('keydown', function(event) {
+                const key = event.key;
+                if (key >= '1' && key <= '9') {
+                    this.value = key;
+                    event.preventDefault(); 
+                } else if (key === 'Backspace' || key === 'Delete' || key === '0') {
+                    this.value = ''; 
+                    event.preventDefault();
+                } else {
+                    event.preventDefault();
+                }
+            });
+
+            });
+
+
+/*
 //Testing Area
 function printSudoku(grid) {
   console.log(" -----------------------------");
@@ -116,6 +146,6 @@ sudoku.generateStartingGrid(40);
   console.log(sudoku.startingGrid);
   
   console.log(printSudoku(sudoku.solution)); 
-  console.log(printSudoku(sudoku.startingGrid)); */
+  console.log(printSudoku(sudoku.startingGrid)); 
 
-console.log("hello world");
+console.log("hello world");*/
