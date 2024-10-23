@@ -25,14 +25,13 @@ function populateSudokuGrid(grid) {
       if (value !== " ") {
         cell.disabled = true;
         cell.style.color = "black";
-      }
-
-      else {
+      } else {
         cell.disabled = false;
-        cell.style.color = "darkgrey"
+        cell.style.color = "darkgrey";
       }
 
       cell.value = value;
+      cell.style.backgroundColor = "transparent";
 
       index++;
     }
@@ -105,23 +104,24 @@ revealSolutionButton.addEventListener("click", () =>
 4. how to make sure colour changes back when changes are made?
 5. if arrays are identical, display message
  */
-const inputs = document.querySelectorAll(".numberInputs");
-const table = document.getElementById("puzzleTable")
+
+const table = document.getElementById("puzzleTable");
 
 function checkAgainstSolution() {
-const inputtedValues = Array.from(inputs).map((input) => Number(input.value));
+  const inputs = document.querySelectorAll("#puzzleContainer input");
+  const inputtedValues = Array.from(inputs).map((input) => Number(input.value));
 
-console.log(inputtedValues);
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      const a = 9*i + j;
-      /*console.log(inputtedValues[a]);
-      console.log(currentSolution[i][j])*/
-      if (currentStartingGrid[i][j]===" " && currentSolution[i][j] === inputtedValues[a]) {
-        table.rows[i].cells[j].style.backgroundColor = "rgb(221, 255, 243)";
-      }
-      else if (currentStartingGrid[i][j]===" " && inputtedValues[a] !== 0) {
-        table.rows[i].cells[j].style.backgroundColor = "rgb(255, 208, 208)";
+      const a = 9 * i + j;
+      const cell = inputs[a];
+      if (
+        currentStartingGrid[i][j] === " " &&
+        currentSolution[i][j] === inputtedValues[a]
+      ) {
+        cell.style.color = "rgb(0, 128, 43)";
+      } else if (currentStartingGrid[i][j] === " " && inputtedValues[a] !== 0) {
+        cell.style.color = "rgb(153, 0, 0)";
       }
     }
   }
@@ -130,7 +130,7 @@ console.log(inputtedValues);
 const validateButton = document.getElementById("validateButton");
 validateButton.addEventListener("click", checkAgainstSolution);
 
-
+const inputs = document.querySelectorAll(".numberInputs");
 //Event listener for input boxes to only allow 1-9
 inputs.forEach((input) => {
   input.addEventListener("input", function () {
@@ -144,6 +144,7 @@ inputs.forEach((input) => {
     const key = event.key;
     if (key >= "1" && key <= "9") {
       this.value = key;
+      input.style.color="darkgrey"
       event.preventDefault();
     } else if (key === "Backspace" || key === "Delete" || key === "0") {
       this.value = "";

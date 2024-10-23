@@ -52,6 +52,9 @@ min-width: 300px;
   .numberInputs {
     height: 100%;
     width: 100%;
+    display: block;
+    position: relative;
+    right: 2px; /* Janky way to center*/
     margin: 0 auto;
     background-color: transparent;
     font-size: 30px;
@@ -64,11 +67,12 @@ min-width: 300px;
 
   .gridSquare {
     padding: 0px;
-    transition: background-color 0.3s; /* Smooth transition */
+    transition: background-color 0.3s;
+    background-color: white;
 }
 
 .gridSquare:focus-within {
-  background-color: #ececec; /* Change to your desired color */
+  background-color: #ececec; 
 }
 }
 
