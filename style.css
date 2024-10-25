@@ -1,4 +1,4 @@
-body {
+.webpage {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -64,6 +64,17 @@ min-width: 300px;
     caret-color: transparent;
     outline: none;
   }
+
+  .numberInputs::-webkit-outer-spin-button,
+.numberInputs::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.numberInputs[type=number] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
 
   .gridSquare {
     padding: 0px;
