@@ -21,12 +21,13 @@ h2 {
 /*Puzzle*/
 
 #puzzleContainer {
-  display: flex;
-  max-width: 450px;
-  width: 90vw;
-min-width: 300px;
-  padding: 10px;
-  aspect-ratio: 1;
+    display: flex;
+    justify-content: center; 
+    max-width: 450px;
+    min-width: 250px;
+    padding: 10px;
+    margin: auto;
+  
 
   table {
     position: center;
@@ -47,17 +48,16 @@ min-width: 300px;
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
+    text-align: center;
+    vertical-align: middle;
   }
 
   .numberInputs {
-    height: 100%;
-    width: 100%;
-    display: block;
-    position: relative;
-    right: 2px; /* Janky way to center*/
+    height: 90%;
+    width: 90%;
     margin: 0 auto;
     background-color: transparent;
-    font-size: 30px;
+    font-size: 36px;
     color: darkgrey;
     text-align: center;
     border: none;
@@ -83,6 +83,7 @@ min-width: 300px;
 }
 
 .gridSquare:focus-within {
+  transition: background-color 0.3s;
   background-color: #ececec; 
 }
 }
