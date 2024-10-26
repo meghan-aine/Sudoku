@@ -25,12 +25,14 @@ h2 {
     justify-content: center; 
     max-width: 450px;
     min-width: 250px;
-    padding: 10px;
     margin: auto;
-  
+    aspect-ratio: 1;
 
   table {
     width: 90vw;
+    height: 100%;
+    max-width: 450px;
+    min-width: 250px;
     position: center;
     border-collapse: collapse;
     aspect-ratio: 1;
@@ -54,8 +56,8 @@ h2 {
   }
 
   .numberInputs {
-    height: 90%;
-    width: 90%;
+    height: 80%;
+    width: 80%;
     margin: 0 auto;
     background-color: transparent;
     font-size: 36px;
