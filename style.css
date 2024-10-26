@@ -19,21 +19,27 @@ h2 {
 }
 
 /*Puzzle*/
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  aspect-ratio: 1;
+  border: 5px solid black;
+}
+
+td {
+  border: 1px solid black;
+  margin: 0px;
+  padding: 0px;
+}
 
 #puzzleContainer {
   display: flex;
   max-width: 450px;
+  /*min-width: 300px;*/
   width: 90vw;
-min-width: 300px;
   padding: 10px;
-  aspect-ratio: 1;
-
-  table {
-    position: center;
-    border-collapse: collapse;
-    aspect-ratio: 1;
-    border: 5px solid black;
-  }
+  height: auto;
+  /*aspect-ratio: 1;*/
 
   .boldCol {
     border-right: 5px solid black;
@@ -41,12 +47,6 @@ min-width: 300px;
 
   .boldRow {
     border-bottom: 5px solid black;
-  }
-
-  td {
-    border: 1px solid black;
-    margin: 0px;
-    padding: 0px;
   }
 
   .numberInputs {
@@ -126,7 +126,7 @@ button {
 @media screen and (max-width: 550px) {
 
     .numberInputs {
-      font-size: 18px;
+      font-size: 5vw;
     }
   
 }
